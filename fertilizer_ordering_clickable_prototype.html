@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fertilizer Ordering Pilot — Test Prototype</title>
+<style>
+:root{--green:#145c43;--green2:#e8f3ed;--ink:#17231d;--muted:#617067;--line:#d8e2dc;--orange:#b56b2d;--bg:#f5f8f6;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Arial,sans-serif;color:var(--ink);line-height:1.5}
+header{background:var(--green);color:#fff;padding:22px 18px}header .wrap,main{max-width:980px;margin:auto}
+.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:1px;opacity:.85}
+h1{font-size:26px;margin:5px 0}header p{margin:4px 0 0;max-width:700px;color:#e4f1e9}
+main{padding:20px 16px 50px}.notice{background:#fff7e8;border:1px solid #f1d4a9;border-radius:10px;padding:12px 14px;margin-bottom:18px;font-size:14px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}.tab{border:1px solid var(--line);background:white;padding:10px 14px;border-radius:9px;cursor:pointer;font-weight:700}.tab.active{background:var(--green);color:#fff;border-color:var(--green)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.card,.panel{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:0 2px 7px #143c2510}
+.product-icon{font-size:28px}.pill{display:inline-block;background:var(--green2);color:var(--green);padding:4px 8px;border-radius:99px;font-size:12px;font-weight:bold}
+.price{font-size:23px;font-weight:800;margin:8px 0 2px}.muted{color:var(--muted);font-size:13px}.btn{display:inline-block;background:var(--green);color:#fff;border:0;border-radius:8px;padding:11px 15px;cursor:pointer;font-weight:bold;text-decoration:none}.btn.secondary{background:white;color:var(--green);border:1px solid var(--green)}.btn:disabled{opacity:.45;cursor:not-allowed}
+label{display:block;font-weight:bold;font-size:13px;margin:12px 0 5px}input,select,textarea{width:100%;padding:11px;border:1px solid #cbd7cf;border-radius:8px;font:inherit;background:#fff}
+.formgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}.section-title{margin:0 0 12px;font-size:20px}.hidden{display:none!important}.success{border-left:4px solid var(--green);background:#eef7f1;padding:14px;border-radius:8px}.warning{border-left:4px solid var(--orange);background:#fff7e8;padding:14px;border-radius:8px}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:10px;border-bottom:1px solid var(--line);vertical-align:top}th{background:#f0f5f1}.status{font-weight:bold;color:#8a581e}.small{font-size:12px}.footer{margin-top:20px;color:var(--muted);font-size:12px}
+@media(max-width:520px){h1{font-size:22px}.card,.panel{padding:13px}.price{font-size:20px}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><div class="eyebrow">Pilot prototype · Test data only</div><h1>Pesan Pupuk Sawit via WhatsApp</h1><p>Katalog ringkas untuk membantu pekebun mengajukan permintaan. Toko tetap memeriksa stok, harga akhir, dan opsi pengambilan/pengiriman sebelum pesanan diterima.</p></div></header>
+<main>
+<div class="notice"><strong>Penting:</strong> Produk, harga, dan stok di halaman ini adalah data simulasi untuk pengujian alur, bukan penawaran nyata atau rekomendasi agronomi. Tanyakan kepada toko atau tenaga agronomi jika belum yakin memilih produk.</div>
+<div class="tabs"><button class="tab active" id="catalogTab" onclick="showView('catalog')">1. Katalog</button><button class="tab" id="orderTab" onclick="showView('order')">2. Form permintaan</button><button class="tab" id="operatorTab" onclick="showView('operator')">3. Tampilan toko</button></div>
+<section id="catalog">
+<h2 class="section-title">Pilih produk untuk ditanyakan</h2><p class="muted">Pilih berdasarkan nama/kemasan yang ingin ditanyakan. Katalog ini tidak menentukan pupuk yang cocok untuk lahan Anda.</p>
+<div class="grid">
+<div class="card"><div class="product-icon">🌱</div><span class="pill">DATA UJI A</span><h3>Pupuk NPK Sawit 15-15-6-4</h3><p>Contoh produk majemuk untuk kebutuhan perkebunan. Periksa label dan kesesuaian penggunaan dengan toko/ahli.</p><p><strong>Kemasan:</strong> 50 kg</p><div class="price">Rp 250.000</div><p class="muted">Harga simulasi per karung · belum dikonfirmasi</p><button class="btn" onclick="chooseProduct('Pupuk NPK Sawit 15-15-6-4 · 50 kg · Rp 250.000 (simulasi)')">Ajukan permintaan</button></div>
+<div class="card"><div class="product-icon">🪴</div><span class="pill">DATA UJI B</span><h3>Pupuk Dolomit</h3><p>Contoh produk pembenah tanah. Kebutuhan dan dosis harus ditentukan berdasarkan kondisi lahan dan saran yang tepat.</p><p><strong>Kemasan:</strong> 50 kg</p><div class="price">Rp 85.000</div><p class="muted">Harga simulasi per karung · belum dikonfirmasi</p><button class="btn" onclick="chooseProduct('Pupuk Dolomit · 50 kg · Rp 85.000 (simulasi)')">Ajukan permintaan</button></div>
+<div class="card"><div class="product-icon">🌾</div><span class="pill">DATA UJI C</span><h3>Pupuk Urea</h3><p>Contoh produk pupuk nitrogen. Pastikan kebutuhan, label, dan penggunaannya bersama toko atau tenaga agronomi.</p><p><strong>Kemasan:</strong> 50 kg</p><div class="price">Rp 180.000</div><p class="muted">Harga simulasi per karung · belum dikonfirmasi</p><button class="btn" onclick="chooseProduct('Pupuk Urea · 50 kg · Rp 180.000 (simulasi)')">Ajukan permintaan</button></div>
+</div>
+<div style="margin-top:16px"><button class="btn secondary" onclick="showView('order')">Lanjut tanpa memilih produk</button></div>
+</section>
+<section id="order" class="hidden">
+<div class="panel"><h2 class="section-title">Form permintaan pesanan</h2><p class="muted">Form ini hanya mencatat permintaan. Jangan mengirim data sensitif.</p>
+<form id="orderForm">
+<div class="formgrid"><div><label for="name">Nama</label><input id="name" required placeholder="Nama pekebun"></div><div><label for="village">Desa / lokasi</label><input id="village" required placeholder="Nama desa atau dusun"></div>
+<div><label for="product">Produk yang ditanyakan</label><select id="product" required><option value="">Pilih produk</option><option>Pupuk NPK Sawit 15-15-6-4 · 50 kg · Rp 250.000 (simulasi)</option><option>Pupuk Dolomit · 50 kg · Rp 85.000 (simulasi)</option><option>Pupuk Urea · 50 kg · Rp 180.000 (simulasi)</option><option>Belum yakin — perlu bertanya ke toko</option></select></div>
+<div><label for="qty">Jumlah kemasan</label><input id="qty" type="number" min="1" max="100" value="1" required></div>
+<div><label for="fulfillment">Pilihan pemenuhan</label><select id="fulfillment" required><option value="">Pilih opsi</option><option>Ambil di toko</option><option>Minta pengiriman (perlu cek area dan biaya)</option><option>Belum tahu — minta konfirmasi</option></select></div>
+<div><label for="contact">Nomor WhatsApp / cara dihubungi</label><input id="contact" required placeholder="Nomor yang bisa dihubungi"></div></div>
+<label for="notes">Catatan (opsional)</label><textarea id="notes" rows="3" placeholder="Waktu yang nyaman dihubungi atau pertanyaan singkat"></textarea>
+<p class="muted">Dengan mengirim, Anda meminta toko menghubungi Anda. Ini belum merupakan pesanan yang diterima.</p>
+<button class="btn" type="submit">Kirim permintaan (simulasi)</button> <button class="btn secondary" type="button" onclick="showView('catalog')">Kembali ke katalog</button>
+</form><div id="confirmation" class="hidden" style="margin-top:16px"></div></div>
+</section>
+<section id="operator" class="hidden">
+<div class="panel"><h2 class="section-title">Tampilan petugas toko</h2><p class="muted">Contoh alur manual. Data pesanan yang Anda kirim di sesi ini muncul di bawah; data tidak dikirim ke server.</p><div class="warning"><strong>Langkah petugas:</strong> (1) hubungi pelanggan, (2) cek stok fisik, (3) konfirmasi harga final, (4) cek cakupan/biaya pengiriman atau jadwal ambil, (5) ubah status hanya setelah pelanggan menyetujui.</div>
+<div style="overflow-x:auto;margin-top:14px"><table><thead><tr><th>ID</th><th>Pemohon / lokasi</th><th>Produk / jumlah</th><th>Pemenuhan</th><th>Status</th><th>Aksi</th></tr></thead><tbody id="orderRows"><tr><td colspan="6" class="muted">Belum ada permintaan dalam sesi ini.</td></tr></tbody></table></div>
+<p class="small muted">Jangan tandai “Dikonfirmasi” sebelum stok, harga akhir, dan pemenuhan benar-benar diperiksa.</p></div>
+</section>
+<div class="footer">Prototype demonstrasi untuk hiring case study. Tidak terhubung ke WhatsApp, pembayaran, inventori, atau sistem pengiriman. Data hanya tersimpan sementara di halaman ini.</div>
+</main>
+<script>
+let requests=[], selected='';
+function showView(view){
+ ['catalog','order','operator'].forEach(v=>document.getElementById(v).classList.toggle('hidden',v!==view));
+ ['catalogTab','orderTab','operatorTab'].forEach((id,i)=>document.getElementById(id).classList.toggle('active',['catalog','order','operator'][i]===view));
+ if(view==='operator') renderRows();
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+function chooseProduct(p){selected=p;document.getElementById('product').value=p;showView('order')}
+document.getElementById('orderForm').addEventListener('submit',function(e){
+ e.preventDefault();
+ const r={id:'REQ-'+String(requests.length+1).padStart(3,'0'),name:document.getElementById('name').value.trim(),village:document.getElementById('village').value.trim(),product:document.getElementById('product').value,qty:document.getElementById('qty').value,fulfillment:document.getElementById('fulfillment').value,contact:document.getElementById('contact').value.trim(),notes:document.getElementById('notes').value,status:'Menunggu pemeriksaan toko'};
+ requests.push(r);
+ const c=document.getElementById('confirmation');c.classList.remove('hidden');c.innerHTML=`<div class="success"><h3>Permintaan tercatat: ${r.id}</h3><p>Terima kasih, ${escapeHtml(r.name)}. Ini <strong>belum merupakan konfirmasi pesanan</strong>.</p><ul><li>Toko akan memeriksa ketersediaan stok.</li><li>Toko akan mengonfirmasi harga akhir.</li><li>Toko akan memastikan pengambilan/pengiriman tersedia di lokasi Anda dan menjelaskan biaya/jadwalnya.</li></ul><p>Jika produk belum pasti, sampaikan pertanyaan kepada toko sebelum menyetujui pesanan.</p><button class="btn secondary" onclick="showView('operator')">Lihat alur petugas toko</button></div>`;
+ this.reset();document.getElementById('qty').value=1;
+});
+function renderRows(){
+ const tbody=document.getElementById('orderRows');
+ if(!requests.length){tbody.innerHTML='<tr><td colspan="6" class="muted">Belum ada permintaan dalam sesi ini.</td></tr>';return}
+ tbody.innerHTML=requests.map(r=>`<tr><td>${r.id}</td><td>${escapeHtml(r.name)}<br><span class="muted">${escapeHtml(r.village)}</span><br><span class="muted">${escapeHtml(r.contact)}</span></td><td>${escapeHtml(r.product)}<br>Jumlah: ${r.qty}</td><td>${escapeHtml(r.fulfillment)}</td><td class="status">${escapeHtml(r.status)}</td><td><button class="btn secondary" onclick="advance('${r.id}')">Catat stok/harga dicek</button></td></tr>`).join('');
+}
+function advance(id){const r=requests.find(x=>x.id===id);if(r){r.status='Pemeriksaan dicatat — konfirmasi pelanggan masih diperlukan';renderRows();alert('Catat hasil pemeriksaan stok, harga final, dan pemenuhan secara manual. Status ini tidak berarti pesanan diterima.');}}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+</script>
+</body></html>
